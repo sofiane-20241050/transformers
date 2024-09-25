@@ -1019,6 +1019,7 @@ class GPT2Model(GPT2PreTrainedModel):
             past_length = 0
             past_key_values = tuple([None] * len(self.h))
         else:
+            # past_key_values: size (batch_size, num_heads, sequence_length, head_dim)
             past_length = past_key_values[0][0].size(-2)
         if position_ids is None:
             position_ids = torch.arange(past_length, input_shape[-1] + past_length, dtype=torch.long, device=device)
